@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 # SWE6813-Spring-Team3
-=======
+
 # Behavior-Aware Matchmaking Web App
 
 Stack aligned with your requirement:
@@ -52,6 +51,3 @@ If backend address changes, set `VITE_API_BASE`.
 cd service
 npm test
 ```
-
-Uses `mongodb-memory-server` for isolated automated tests.
->>>>>>> 150775e (feat(init): scaffold React + Express + MongoDB prototype)
