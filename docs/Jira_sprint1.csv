@@ -1,0 +1,21 @@
+﻿Issue Type,Issue key,Issue id,Summary,Assignee,Assignee Id,Reporter,Reporter Id,Priority,Status,Resolution,Created,Updated,Due date
+Story,SCRUM-21,10055,Testing Increment,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,07/Mar/26 4:16 PM,07/Mar/26 4:19 PM,27/Mar/26 12:00 AM
+Story,SCRUM-20,10054,CD Setup,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,07/Mar/26 4:15 PM,07/Mar/26 4:19 PM,27/Mar/26 12:00 AM
+Story,SCRUM-19,10053,CI Setup (GitHub Actions),YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,07/Mar/26 4:14 PM,07/Mar/26 4:20 PM,27/Mar/26 12:00 AM
+Story,SCRUM-18,10052,Visualization - V1,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,07/Mar/26 4:11 PM,07/Mar/26 4:19 PM,27/Mar/26 12:00 AM
+Subtask,SCRUM-17,10051,Refine,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,07/Mar/26 3:37 PM,07/Mar/26 3:37 PM,
+Subtask,SCRUM-16,10049,Refine,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,07/Mar/26 3:37 PM,07/Mar/26 3:37 PM,
+Subtask,SCRUM-15,10047,Refine,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,07/Mar/26 3:36 PM,07/Mar/26 3:36 PM,
+Epic,SCRUM-14,10013,Sprint3,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,04/Mar/26 12:21 PM,04/Mar/26 12:23 PM,18/Apr/26 12:00 AM
+Epic,SCRUM-13,10012,Sprint2,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,04/Mar/26 12:21 PM,04/Mar/26 12:22 PM,27/Mar/26 12:00 AM
+Epic,SCRUM-12,10011,Sprint1,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,04/Mar/26 12:21 PM,04/Mar/26 12:22 PM,08/Mar/26 12:00 AM
+Story,SCRUM-10,10009,Cross-game Player Discovery (Search/Lookup),,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,04/Mar/26 12:19 PM,07/Mar/26 4:18 PM,27/Mar/26 12:00 AM
+Story,SCRUM-9,10008,Friend System (Add/Remove/List friends),YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,04/Mar/26 12:18 PM,07/Mar/26 4:20 PM,27/Mar/26 12:00 AM
+Story,SCRUM-8,10007,Matchmaking Logic & API,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,To Do,,04/Mar/26 12:17 PM,07/Mar/26 4:20 PM,27/Mar/26 12:00 AM
+Story,SCRUM-7,10006,Player Profile (Skill + Behavior fields),YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,Done,Done,04/Mar/26 11:42 AM,07/Mar/26 4:21 PM,06/Mar/26 12:00 AM
+Story,SCRUM-6,10005,User Auth (Register/Login),David Lincoln,712020:24126e32-a8e1-4085-a885-cb2ca7015daa,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,Done,Done,04/Mar/26 11:41 AM,07/Mar/26 4:20 PM,06/Mar/26 12:00 AM
+Story,SCRUM-5,10004,Testing Baseline (Test-first evidence),Elvin Chi,712020:d2d23d3a-f390-4376-9aa2-5919d7941682,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,Done,Done,04/Mar/26 11:41 AM,07/Mar/26 4:20 PM,06/Mar/26 12:00 AM
+Subtask,SCRUM-4,10003,Refine,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,,To Do,,04/Mar/26 11:30 AM,07/Mar/26 3:36 PM,
+Task,SCRUM-3,10002,Task 3,,,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,,In Progress,,04/Mar/26 11:30 AM,04/Mar/26 11:30 AM,
+Story,SCRUM-2,10001,Basic Match API,David Lincoln,712020:24126e32-a8e1-4085-a885-cb2ca7015daa,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,,Done,Done,04/Mar/26 11:30 AM,07/Mar/26 4:20 PM,06/Mar/26 12:00 AM
+Story,SCRUM-1,10000,Project Skeleton + Repo Setup,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,,Done,Done,04/Mar/26 11:30 AM,07/Mar/26 4:12 PM,02/Mar/26 12:00 AM
