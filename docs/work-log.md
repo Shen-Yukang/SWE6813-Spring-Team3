@@ -1,0 +1,1 @@
+![alt text](work-log-sprint1.png)
