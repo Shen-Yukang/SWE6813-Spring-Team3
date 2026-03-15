@@ -1,10 +1,36 @@
 const {
+  DEFAULT_WEIGHTS,
+  normalizeWeights,
+  preferenceCompatibility,
+  passesFilters,
   skillSimilarity,
   behaviorSimilarity,
   scoreProfiles,
 } = require('../../src/utils/matchScoring');
 
 describe('matchScoring utility', () => {
+  test('normalizeWeights returns normalized custom weights', () => {
+    expect(normalizeWeights({ skill: 3, behavior: 1, preference: 2 })).toEqual({
+      skill: 0.5,
+      behavior: 1 / 6,
+      preference: 1 / 3,
+    });
+  });
+
+  test('normalizeWeights falls back to defaults for invalid values', () => {
+    expect(normalizeWeights({ skill: -1, behavior: 'bad', preference: 1 })).toEqual({
+      skill: 0.25,
+      behavior: 0.25,
+      preference: 0.5,
+    });
+  });
+
+  test('normalizeWeights falls back to normalized defaults when total is zero', () => {
+    expect(normalizeWeights({ skill: 0, behavior: 0, preference: 0 })).toEqual(
+      normalizeWeights(DEFAULT_WEIGHTS)
+    );
+  });
+
   test('skillSimilarity returns 1 for identical scores', () => {
     expect(skillSimilarity(80, 80)).toBe(1);
   });
@@ -33,18 +59,82 @@ describe('matchScoring utility', () => {
     expect(value).toBeCloseTo((0.9 + 0.8) / 2, 5);
   });
 
+  test('preferenceCompatibility returns 0 when no tracked fields overlap', () => {
+    expect(preferenceCompatibility({ mode: 'ranked' }, { mode: 'ranked' })).toBe(0);
+  });
+
+  test('preferenceCompatibility averages matches across tracked preference fields', () => {
+    const value = preferenceCompatibility(
+      { region: 'NA', gameMode: 'Ranked', playStyle: 'Aggressive' },
+      { region: 'na', gameMode: 'casual', playStyle: 'Aggressive' }
+    );
+
+    expect(value).toBeCloseTo(2 / 3, 5);
+  });
+
+  test('passesFilters rejects candidate outside max skill gap', () => {
+    const target = { skillScore: 80, preferences: {} };
+    const candidate = { skillScore: 55, preferences: { region: 'NA' } };
+
+    expect(passesFilters(target, candidate, { maxSkillGap: 20 })).toBe(false);
+  });
+
+  test('passesFilters matches configured preference filters case-insensitively', () => {
+    const target = { skillScore: 80, preferences: { region: 'NA' } };
+    const candidate = {
+      skillScore: 75,
+      preferences: { region: 'eu', gameMode: 'Ranked', playStyle: 'Support' },
+    };
+
+    expect(
+      passesFilters(target, candidate, {
+        maxSkillGap: 10,
+        gameMode: 'ranked',
+        playStyle: 'support',
+      })
+    ).toBe(true);
+    expect(passesFilters(target, candidate, { region: 'na' })).toBe(false);
+  });
+
   test('scoreProfiles returns total with breakdown', () => {
     const result = scoreProfiles(
-      { skillScore: 80, behaviorMetrics: { teamwork: 90 } },
-      { skillScore: 70, behaviorMetrics: { teamwork: 80 } },
-      { skill: 0.6, behavior: 0.4 }
+      {
+        skillScore: 80,
+        behaviorMetrics: { teamwork: 90 },
+        preferences: { region: 'NA', gameMode: 'Ranked', playStyle: 'Aggressive' },
+      },
+      {
+        skillScore: 70,
+        behaviorMetrics: { teamwork: 80 },
+        preferences: { region: 'NA', gameMode: 'Ranked', playStyle: 'Defensive' },
+      },
+      { skill: 0.6, behavior: 0.3, preference: 0.1 }
     );
 
     expect(result).toHaveProperty('totalScore');
     expect(result.breakdown).toEqual({
       skillSimilarity: 0.9,
       behaviorSimilarity: 0.9,
+      preferenceCompatibility: 2 / 3,
     });
-    expect(result.totalScore).toBeCloseTo(0.9, 5);
+    expect(result.totalScore).toBeCloseTo(0.8766666667, 5);
+  });
+
+  test('scoreProfiles uses normalized default weights when input is invalid', () => {
+    const result = scoreProfiles(
+      {
+        skillScore: 90,
+        behaviorMetrics: { teamwork: 90 },
+        preferences: { region: 'NA' },
+      },
+      {
+        skillScore: 70,
+        behaviorMetrics: { teamwork: 70 },
+        preferences: { region: 'EU' },
+      },
+      { skill: -1, behavior: Number.NaN, preference: 0 }
+    );
+
+    expect(result.totalScore).toBeCloseTo(0.8, 5);
   });
 });
