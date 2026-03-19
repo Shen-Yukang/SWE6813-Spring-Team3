@@ -91,6 +91,79 @@ describe('core services', () => {
     expect(matches[0].userId).toBe(String(b._id));
   });
 
+  test('matchmaking weights can change ranking order', async () => {
+    const a = await authService.register({ username: 'weight-a', password: '1' });
+    const b = await authService.register({ username: 'weight-b', password: '1' });
+    const c = await authService.register({ username: 'weight-c', password: '1' });
+
+    await profileService.upsertProfile({
+      userId: String(a._id),
+      skillScore: 80,
+      behaviorMetrics: { teamwork: 50, comms: 50 },
+      preferences: { region: 'NA', gameMode: 'ranked', playStyle: 'support' },
+    });
+    await profileService.upsertProfile({
+      userId: String(b._id),
+      skillScore: 79,
+      behaviorMetrics: { teamwork: 10, comms: 10 },
+      preferences: { region: 'EU', gameMode: 'casual', playStyle: 'duelist' },
+    });
+    await profileService.upsertProfile({
+      userId: String(c._id),
+      skillScore: 55,
+      behaviorMetrics: { teamwork: 50, comms: 50 },
+      preferences: { region: 'NA', gameMode: 'ranked', playStyle: 'support' },
+    });
+
+    const skillWeighted = await matchmakingService.getMatches({
+      userId: String(a._id),
+      limit: 2,
+      weights: { skill: 1, behavior: 0, preference: 0 },
+    });
+    const preferenceWeighted = await matchmakingService.getMatches({
+      userId: String(a._id),
+      limit: 2,
+      weights: { skill: 0.1, behavior: 0, preference: 0.9 },
+    });
+
+    expect(skillWeighted[0].userId).toBe(String(b._id));
+    expect(preferenceWeighted[0].userId).toBe(String(c._id));
+  });
+
+  test('matchmaking filters candidates before scoring', async () => {
+    const a = await authService.register({ username: 'filter-a', password: '1' });
+    const b = await authService.register({ username: 'filter-b', password: '1' });
+    const c = await authService.register({ username: 'filter-c', password: '1' });
+
+    await profileService.upsertProfile({
+      userId: String(a._id),
+      skillScore: 80,
+      behaviorMetrics: { teamwork: 80, comms: 80 },
+      preferences: { region: 'NA', gameMode: 'ranked', playStyle: 'support' },
+    });
+    await profileService.upsertProfile({
+      userId: String(b._id),
+      skillScore: 78,
+      behaviorMetrics: { teamwork: 79, comms: 81 },
+      preferences: { region: 'NA', gameMode: 'ranked', playStyle: 'support' },
+    });
+    await profileService.upsertProfile({
+      userId: String(c._id),
+      skillScore: 79,
+      behaviorMetrics: { teamwork: 80, comms: 80 },
+      preferences: { region: 'EU', gameMode: 'ranked', playStyle: 'support' },
+    });
+
+    const matches = await matchmakingService.getMatches({
+      userId: String(a._id),
+      limit: 5,
+      filters: { region: 'NA', maxSkillGap: 5 },
+    });
+
+    expect(matches).toHaveLength(1);
+    expect(matches[0].userId).toBe(String(b._id));
+  });
+
   test('matchmaking rejects unknown user', async () => {
     await expect(matchmakingService.getMatches({ userId: 'unknown' })).rejects.toThrow('user not found');
   });

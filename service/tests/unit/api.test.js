@@ -41,4 +41,52 @@ describe('api smoke tests', () => {
     expect(matchRes.status).toBe(200);
     expect(matchRes.body.matches[0].userId).toBe(u2.body.id);
   });
+
+  test('matchmaking accepts filters and preference weight query params', async () => {
+    const u1 = await request(app).post('/api/auth/register').send({ username: 'query-alice', password: 'pw' });
+    const u2 = await request(app).post('/api/auth/register').send({ username: 'query-bob', password: 'pw' });
+    const u3 = await request(app).post('/api/auth/register').send({ username: 'query-carl', password: 'pw' });
+
+    await request(app).put(`/api/profile/${u1.body.id}`).send({
+      skillScore: 80,
+      behaviorMetrics: { teamwork: 60 },
+      preferences: { region: 'NA', gameMode: 'ranked', playStyle: 'support' },
+    });
+
+    await request(app).put(`/api/profile/${u2.body.id}`).send({
+      skillScore: 65,
+      behaviorMetrics: { teamwork: 60 },
+      preferences: { region: 'NA', gameMode: 'ranked', playStyle: 'support' },
+    });
+
+    await request(app).put(`/api/profile/${u3.body.id}`).send({
+      skillScore: 79,
+      behaviorMetrics: { teamwork: 60 },
+      preferences: { region: 'EU', gameMode: 'ranked', playStyle: 'support' },
+    });
+
+    const matchRes = await request(app)
+      .get(`/api/matchmaking/${u1.body.id}`)
+      .query({ wPreference: 1, wSkill: 0, wBehavior: 0, region: 'NA', gameMode: 'ranked' });
+
+    expect(matchRes.status).toBe(200);
+    expect(matchRes.body.matches).toHaveLength(1);
+    expect(matchRes.body.matches[0].userId).toBe(u2.body.id);
+    expect(matchRes.body.matches[0].breakdown.preferenceCompatibility).toBe(1);
+  });
+
+  test('matchmaking rejects invalid numeric query params', async () => {
+    const user = await request(app).post('/api/auth/register').send({ username: 'bad-query', password: 'pw' });
+
+    await request(app).put(`/api/profile/${user.body.id}`).send({
+      skillScore: 80,
+      behaviorMetrics: { teamwork: 80 },
+      preferences: {},
+    });
+
+    const matchRes = await request(app).get(`/api/matchmaking/${user.body.id}`).query({ wSkill: 'abc' });
+
+    expect(matchRes.status).toBe(400);
+    expect(matchRes.body.message).toBe('wSkill must be a non-negative number');
+  });
 });
