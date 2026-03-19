@@ -27,13 +27,23 @@ Base URL: `http://localhost:3000/api`
 - Response: profile document
 
 ## Matchmaking
-- `GET /matchmaking/:userId?limit=5&wSkill=0.5&wBehavior=0.5`
+- `GET /matchmaking/:userId`
+- Query params:
+  - `limit`: positive integer, default `5`
+  - `wSkill`: non-negative number
+  - `wBehavior`: non-negative number
+  - `wPreference`: non-negative number
+  - `maxSkillGap`: non-negative number
+  - `region`: string
+  - `gameMode`: string
+  - `playStyle`: string
 - Response:
   - `matches`: array of
     - `userId`
     - `totalScore`
     - `breakdown.skillSimilarity`
     - `breakdown.behaviorSimilarity`
+    - `breakdown.preferenceCompatibility`
 
 ## Friends (scaffold)
 - `POST /friends`
