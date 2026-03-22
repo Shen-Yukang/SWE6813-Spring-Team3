@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3000/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3001/api';
 let authToken = '';
 
 async function request(path, options = {}) {
@@ -18,6 +18,25 @@ async function request(path, options = {}) {
   return data;
 }
 
+function buildQueryString(params = {}) {
+  const searchParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value === undefined || value === null) {
+      return;
+    }
+
+    if (typeof value === 'string' && value.trim() === '') {
+      return;
+    }
+
+    searchParams.set(key, String(value));
+  });
+
+  const queryString = searchParams.toString();
+  return queryString ? `?${queryString}` : '';
+}
+
 export const apiClient = {
   setToken: (token) => {
     authToken = token || '';
@@ -26,5 +45,5 @@ export const apiClient = {
   login: (payload) => request('/auth/login', { method: 'POST', body: JSON.stringify(payload) }),
   upsertProfile: (userId, payload) =>
     request(`/profile/${userId}`, { method: 'PUT', body: JSON.stringify(payload) }),
-  getMatches: (userId) => request(`/matchmaking/${userId}`),
+  getMatches: (userId, options = {}) => request(`/matchmaking/${userId}${buildQueryString(options)}`),
 };
