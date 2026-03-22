@@ -58,4 +58,47 @@ defineFeature(feature, (test) => {
       expect(results[0].userId).toBe(String(users[candidateName]._id));
     });
   });
+
+  test('Player gets filtered recommendations by region and game mode', ({ given, when, then }) => {
+    given('users and profiles exist for filtered matchmaking', async () => {
+      users.alice = await authService.register({ username: 'filtered-alice', password: 'pw' });
+      users.bob = await authService.register({ username: 'filtered-bob', password: 'pw' });
+      users.carl = await authService.register({ username: 'filtered-carl', password: 'pw' });
+
+      await profileService.upsertProfile({
+        userId: String(users.alice._id),
+        skillScore: 70,
+        behaviorMetrics: { teamwork: 80, comms: 80 },
+        preferences: { region: 'NA', gameMode: 'ranked', playStyle: 'support' },
+      });
+      await profileService.upsertProfile({
+        userId: String(users.bob._id),
+        skillScore: 72,
+        behaviorMetrics: { teamwork: 79, comms: 81 },
+        preferences: { region: 'NA', gameMode: 'ranked', playStyle: 'support' },
+      });
+      await profileService.upsertProfile({
+        userId: String(users.carl._id),
+        skillScore: 71,
+        behaviorMetrics: { teamwork: 79, comms: 81 },
+        preferences: { region: 'EU', gameMode: 'casual', playStyle: 'support' },
+      });
+    });
+
+    when(
+      /^player "(.*)" requests matchmaking with region "(.*)" and game mode "(.*)"$/,
+      async (playerName, region, gameMode) => {
+        results = await matchmakingService.getMatches({
+          userId: String(users[playerName]._id),
+          limit: 5,
+          filters: { region, gameMode },
+        });
+      }
+    );
+
+    then(/^the filtered recommendations should only include "(.*)"$/, (candidateName) => {
+      expect(results).toHaveLength(1);
+      expect(results[0].userId).toBe(String(users[candidateName]._id));
+    });
+  });
 });
