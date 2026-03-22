@@ -18,7 +18,18 @@ async function listFriends(req, res, next) {
   }
 }
 
+async function removeFriend(req, res, next) {
+  try {
+    const { userId, friendUserId } = req.body;
+    await friendService.removeFriend({ userId, friendUserId });
+    res.status(200).json({ message: 'Friend removed successfully' });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   addFriend,
   listFriends,
+  removeFriend,
 };
