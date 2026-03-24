@@ -1,1 +1,0 @@
-![alt text](kanban-board-sprint1.png)
