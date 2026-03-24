@@ -1,4 +1,5 @@
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3001/api';
+const API_ORIGIN = import.meta.env.VITE_API_ORIGIN;
+const API_BASE = import.meta.env.VITE_API_BASE || (API_ORIGIN ? `${API_ORIGIN}/api` : 'http://localhost:3000/api');
 let authToken = '';
 
 async function request(path, options = {}) {

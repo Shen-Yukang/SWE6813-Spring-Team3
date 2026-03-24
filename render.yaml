@@ -1,0 +1,32 @@
+services:
+  - type: web
+    runtime: node
+    name: matching-system-api
+    plan: free
+    rootDir: service
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+
+  - type: web
+    runtime: static
+    name: matching-system-frontend
+    plan: free
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    autoDeployTrigger: commit
+    envVars:
+      - key: VITE_API_ORIGIN
+        fromService:
+          type: web
+          name: matching-system-api
+          envVarKey: RENDER_EXTERNAL_URL
