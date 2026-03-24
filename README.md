@@ -2,6 +2,8 @@
 
 # Behavior-Aware Matchmaking Web App
 
+**Live Demo:** [https://matching-system-frontend.onrender.com/](https://matching-system-frontend.onrender.com/)
+
 Stack aligned with your requirement:
 - Frontend: React + Material UI (Vite)
 - Backend: Node.js + Express
@@ -79,7 +81,7 @@ For `matching-system-frontend`:
 2. In Render, create a new Blueprint from this repository.
 3. During setup, provide `MONGO_URI` for the API service.
 4. Complete the initial deploy.
-5. Copy the generated frontend URL and set `CORS_ORIGIN` on `matching-system-api`.
+5. Set `CORS_ORIGIN` on `matching-system-api` to `https://matching-system-frontend.onrender.com`.
 6. Redeploy the API service.
 
 ### Manual Render Setup

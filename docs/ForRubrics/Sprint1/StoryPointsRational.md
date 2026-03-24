@@ -1,5 +1,6 @@
-
 Story Points Summary
+Reference Jira Picture
+
 1. Project Skeleton + Repo Setup — 3 SP - YukangShen
 This task includes setting up the frontend and backend structure (React, Node.js/Express), configuring MongoDB with Docker, and preparing the README and basic documentation. The work is straightforward but necessary for all future development, with moderate effort and low complexity.
 

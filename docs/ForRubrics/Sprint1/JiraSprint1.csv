@@ -1,0 +1,6 @@
+﻿Issue Type,Issue key,Issue id,Summary,Assignee,Assignee Id,Reporter,Reporter Id,Priority,Status,Resolution,Created,Updated,Due date
+Story,SCRUM-1,10000,Project Skeleton + Repo Setup,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,,Done,Done,04/Mar/26 11:30 AM,07/Mar/26 4:12 PM,02/Mar/26 12:00 AM
+Story,SCRUM-2,10001,Basic Match API,David Lincoln,712020:24126e32-a8e1-4085-a885-cb2ca7015daa,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,,Done,Done,04/Mar/26 11:30 AM,08/Mar/26 8:49 PM,08/Mar/26 12:00 AM
+Story,SCRUM-5,10004,Testing Baseline (Test-first evidence),Elvin Chi,712020:d2d23d3a-f390-4376-9aa2-5919d7941682,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,Done,Done,04/Mar/26 11:41 AM,07/Mar/26 4:20 PM,06/Mar/26 12:00 AM
+Story,SCRUM-6,10005,User Auth (Register/Login),David Lincoln,712020:24126e32-a8e1-4085-a885-cb2ca7015daa,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,Done,Done,04/Mar/26 11:41 AM,24/Mar/26 5:36 PM,06/Mar/26 12:00 AM
+Story,SCRUM-7,10006,Player Profile (Skill + Behavior fields),YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,YukangShen,712020:c98f3973-d416-434c-ba8c-6e9b3a80a822,Medium,Done,Done,04/Mar/26 11:42 AM,07/Mar/26 10:32 PM,06/Mar/26 12:00 AM
