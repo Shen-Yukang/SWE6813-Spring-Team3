@@ -9,7 +9,12 @@ async function listByUserId(userId) {
   return FriendEdge.find({ userId }).lean();
 }
 
+async function remove({ userId, friendUserId }) {
+  return FriendEdge.deleteOne({ userId, friendUserId });
+}
+
 module.exports = {
   add,
   listByUserId,
+  remove,
 };
