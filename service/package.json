@@ -7,7 +7,10 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand --testPathPatterns=tests/unit",
+    "test:integration": "jest --runInBand --testPathPatterns=tests/integration",
+    "test:bdd": "jest --runInBand --testPathPatterns=tests/bdd",
+    "test:all": "jest --runInBand"
   },
   "dependencies": {
     "cors": "^2.8.5",
