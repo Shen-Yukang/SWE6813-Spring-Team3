@@ -59,6 +59,15 @@ describe('matchScoring utility', () => {
     expect(value).toBeCloseTo((0.9 + 0.8) / 2, 5);
   });
 
+  test('behaviorSimilarity treats missing metric values as zero', () => {
+    const value = behaviorSimilarity(
+      { teamwork: 100, comms: undefined },
+      { teamwork: 100, comms: 20 }
+    );
+
+    expect(value).toBeCloseTo((1 + 0.8) / 2, 5);
+  });
+
   test('preferenceCompatibility returns 0 when no tracked fields overlap', () => {
     expect(preferenceCompatibility({ mode: 'ranked' }, { mode: 'ranked' })).toBe(0);
   });
@@ -94,6 +103,22 @@ describe('matchScoring utility', () => {
       })
     ).toBe(true);
     expect(passesFilters(target, candidate, { region: 'na' })).toBe(false);
+  });
+
+  test('passesFilters ignores empty filter values', () => {
+    const target = { skillScore: 80, preferences: { region: 'NA' } };
+    const candidate = {
+      skillScore: 75,
+      preferences: { region: 'EU', gameMode: 'Ranked', playStyle: 'Support' },
+    };
+
+    expect(
+      passesFilters(target, candidate, {
+        region: '   ',
+        gameMode: '',
+        playStyle: undefined,
+      })
+    ).toBe(true);
   });
 
   test('scoreProfiles returns total with breakdown', () => {
