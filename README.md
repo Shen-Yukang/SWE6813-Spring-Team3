@@ -16,6 +16,15 @@ Stack aligned with your requirement:
 - `docs/`: architecture and sprint documents
 - `docker-compose.yml`: MongoDB container
 
+## Rubric Guide
+
+For rubric-related evidence and sprint submission materials:
+
+- [Sprint 1 rubric mapping](RubricMapping.md)
+- [Sprint 2 rubric mapping](RubricMappingSprint2.md)
+- [Sprint 1 evidence folder](docs/ForRubrics/Sprint1)
+- [Sprint 2 evidence folder](docs/ForRubrics/Sprint2)
+
 ## 1) Start MongoDB (Docker)
 
 ```bash
