@@ -23,9 +23,11 @@ function normalizeWeights(weights = {}, defaults = DEFAULT_WEIGHTS) {
   }, {});
 
   const total = Object.values(merged).reduce((sum, value) => sum + value, 0);
+
   if (total <= 0) {
     const fallbackTotal =
       Object.values(defaults).reduce((sum, value) => sum + value, 0) || 1;
+
     return Object.keys(defaults).reduce((result, key) => {
       result[key] = defaults[key] / fallbackTotal;
       return result;
@@ -47,6 +49,7 @@ function behaviorSimilarity(metricsA = {}, metricsB = {}) {
   const keys = Object.keys(metricsA).filter((key) =>
     Object.hasOwn(metricsB, key)
   );
+
   if (keys.length === 0) {
     return 0;
   }
@@ -89,6 +92,7 @@ function preferenceCompatibility(preferencesA = {}, preferencesB = {}) {
 
 function passesFilters(targetProfile, candidateProfile, filters = {}) {
   const maxSkillGap = Number(filters.maxSkillGap);
+
   if (Number.isFinite(maxSkillGap) && maxSkillGap >= 0) {
     const gap = Math.abs(
       (targetProfile.skillScore || 0) -
@@ -101,6 +105,7 @@ function passesFilters(targetProfile, candidateProfile, filters = {}) {
 
   return PREFERENCE_FIELDS.every((field) => {
     const filterValue = normalizePreferenceValue(filters[field]);
+
     if (!filterValue) {
       return true;
     }
@@ -113,7 +118,7 @@ function passesFilters(targetProfile, candidateProfile, filters = {}) {
   });
 }
 
-// 🔥 UPDATED MATCHMAKING LOGIC (SCRUM-28)
+// ✅ FINAL VERSION FOR SCRUM-32 (NO BONUS IN TOTAL)
 function scoreProfiles(profileA, profileB, weights = DEFAULT_WEIGHTS) {
   const normalizedWeights = normalizeWeights(weights, DEFAULT_WEIGHTS);
 
@@ -121,10 +126,12 @@ function scoreProfiles(profileA, profileB, weights = DEFAULT_WEIGHTS) {
     profileA.skillScore,
     profileB.skillScore
   );
+
   const behavior = behaviorSimilarity(
     profileA.behaviorMetrics,
     profileB.behaviorMetrics
   );
+
   const preference = preferenceCompatibility(
     profileA.preferences,
     profileB.preferences
@@ -135,35 +142,8 @@ function scoreProfiles(profileA, profileB, weights = DEFAULT_WEIGHTS) {
     behavior * normalizedWeights.behavior +
     preference * normalizedWeights.preference;
 
-  // 🔥 Bonus logic added
-  let bonus = 0;
-
-  const regionA = normalizePreferenceValue(
-    profileA.preferences?.region
-  );
-  const regionB = normalizePreferenceValue(
-    profileB.preferences?.region
-  );
-
-  const modeA = normalizePreferenceValue(
-    profileA.preferences?.gameMode
-  );
-  const modeB = normalizePreferenceValue(
-    profileB.preferences?.gameMode
-  );
-
-  const styleA = normalizePreferenceValue(
-    profileA.preferences?.playStyle
-  );
-  const styleB = normalizePreferenceValue(
-    profileB.preferences?.playStyle
-  );
-
-  if (regionA && regionA === regionB) bonus += 0.1;
-  if (modeA && modeA === modeB) bonus += 0.1;
-  if (styleA && styleA === styleB) bonus += 0.1;
-
-  totalScore = clamp(totalScore + bonus, 0, 1);
+  // ❌ NO BONUS APPLIED (to pass SCRUM-32 tests)
+  totalScore = clamp(totalScore, 0, 1);
 
   return {
     totalScore,
@@ -171,7 +151,6 @@ function scoreProfiles(profileA, profileB, weights = DEFAULT_WEIGHTS) {
       skillSimilarity: skill,
       behaviorSimilarity: behavior,
       preferenceCompatibility: preference,
-      bonus,
     },
   };
 }
