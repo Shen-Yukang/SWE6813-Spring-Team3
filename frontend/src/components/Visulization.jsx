@@ -16,7 +16,7 @@ export default function Visulization({ open, onClose, matches }) {
             {matches.slice(0, 5).map((item, index) => (
               <Box key={`${item.userId}-${index}`} sx={{ p: 1.5, borderRadius: 2, backgroundColor: '#f6f8fb' }}>
                 <Typography sx={{ fontWeight: 700 }}>
-                  {index + 1}. {item.userId}
+                  {index + 1}. {item.username || item.userId}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
                   total {formatScore(item.totalScore)}

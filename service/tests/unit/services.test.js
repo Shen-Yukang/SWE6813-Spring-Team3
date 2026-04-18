@@ -89,6 +89,7 @@ describe('core services', () => {
     const matches = await matchmakingService.getMatches({ userId: String(a._id), limit: 2 });
     expect(matches).toHaveLength(2);
     expect(matches[0].userId).toBe(String(b._id));
+    expect(matches[0].username).toBe('b');
   });
 
   test('matchmaking weights can change ranking order', async () => {
@@ -127,7 +128,9 @@ describe('core services', () => {
     });
 
     expect(skillWeighted[0].userId).toBe(String(b._id));
+    expect(skillWeighted[0].username).toBe('weight-b');
     expect(preferenceWeighted[0].userId).toBe(String(c._id));
+    expect(preferenceWeighted[0].username).toBe('weight-c');
   });
 
   test('matchmaking filters candidates before scoring', async () => {

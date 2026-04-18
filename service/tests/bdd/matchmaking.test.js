@@ -56,6 +56,7 @@ defineFeature(feature, (test) => {
 
     then(/^the first recommendation should be "(.*)"$/, (candidateName) => {
       expect(results[0].userId).toBe(String(users[candidateName]._id));
+      expect(results[0].username).toBe(users[candidateName].username);
     });
   });
 
@@ -99,6 +100,7 @@ defineFeature(feature, (test) => {
     then(/^the filtered recommendations should only include "(.*)"$/, (candidateName) => {
       expect(results).toHaveLength(1);
       expect(results[0].userId).toBe(String(users[candidateName]._id));
+      expect(results[0].username).toBe(users[candidateName].username);
     });
   });
 });

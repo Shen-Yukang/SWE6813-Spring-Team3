@@ -8,3 +8,5 @@ yarn-error.log*
 coverage/
 **tmp**
 .pytest_cache
+frontend/.env.local
+frontend/dist/

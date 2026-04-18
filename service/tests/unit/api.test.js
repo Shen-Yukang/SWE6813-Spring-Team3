@@ -40,6 +40,7 @@ describe('api smoke tests', () => {
     const matchRes = await request(app).get(`/api/matchmaking/${u1.body.id}`);
     expect(matchRes.status).toBe(200);
     expect(matchRes.body.matches[0].userId).toBe(u2.body.id);
+    expect(matchRes.body.matches[0].username).toBe('bob');
   });
 
   test('matchmaking accepts filters and preference weight query params', async () => {
@@ -72,7 +73,44 @@ describe('api smoke tests', () => {
     expect(matchRes.status).toBe(200);
     expect(matchRes.body.matches).toHaveLength(1);
     expect(matchRes.body.matches[0].userId).toBe(u2.body.id);
+    expect(matchRes.body.matches[0].username).toBe('query-bob');
     expect(matchRes.body.matches[0].breakdown.preferenceCompatibility).toBe(1);
+  });
+
+  test('discovery returns players matching username query', async () => {
+    await request(app).post('/api/auth/register').send({ username: 'alpha', password: 'pw' });
+    await request(app).post('/api/auth/register').send({ username: 'beta', password: 'pw' });
+
+    const res = await request(app).get('/api/discovery').query({ q: 'alp' });
+    expect(res.status).toBe(200);
+    expect(res.body.players).toHaveLength(1);
+    expect(res.body.players[0].username).toBe('alpha');
+  });
+
+  test('discovery filters by skill range', async () => {
+    const u1 = await request(app).post('/api/auth/register').send({ username: 'skill-high', password: 'pw' });
+    const u2 = await request(app).post('/api/auth/register').send({ username: 'skill-low', password: 'pw' });
+
+    await request(app).put(`/api/profile/${u1.body.id}`).send({ skillScore: 90, behaviorMetrics: {}, preferences: {} });
+    await request(app).put(`/api/profile/${u2.body.id}`).send({ skillScore: 30, behaviorMetrics: {}, preferences: {} });
+
+    const res = await request(app).get('/api/discovery').query({ skillMin: 80, skillMax: 100 });
+    expect(res.status).toBe(200);
+    expect(res.body.players.some((p) => p.username === 'skill-high')).toBe(true);
+    expect(res.body.players.some((p) => p.username === 'skill-low')).toBe(false);
+  });
+
+  test('discovery filters by region preference', async () => {
+    const u1 = await request(app).post('/api/auth/register').send({ username: 'na-player', password: 'pw' });
+    const u2 = await request(app).post('/api/auth/register').send({ username: 'eu-player', password: 'pw' });
+
+    await request(app).put(`/api/profile/${u1.body.id}`).send({ skillScore: 60, behaviorMetrics: {}, preferences: { region: 'NA' } });
+    await request(app).put(`/api/profile/${u2.body.id}`).send({ skillScore: 60, behaviorMetrics: {}, preferences: { region: 'EU' } });
+
+    const res = await request(app).get('/api/discovery').query({ region: 'NA' });
+    expect(res.status).toBe(200);
+    expect(res.body.players.some((p) => p.username === 'na-player')).toBe(true);
+    expect(res.body.players.some((p) => p.username === 'eu-player')).toBe(false);
   });
 
   test('matchmaking rejects invalid numeric query params', async () => {
