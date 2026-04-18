@@ -14,7 +14,9 @@ async function request(path, options = {}) {
 
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    throw new Error(data.message || 'request failed');
+    const err = new Error(data.message || 'request failed');
+    err.statusCode = res.status;
+    throw err;
   }
   return data;
 }
@@ -44,7 +46,9 @@ export const apiClient = {
   },
   register: (payload) => request('/auth/register', { method: 'POST', body: JSON.stringify(payload) }),
   login: (payload) => request('/auth/login', { method: 'POST', body: JSON.stringify(payload) }),
+  getProfile: (userId) => request(`/profile/${userId}`),
   upsertProfile: (userId, payload) =>
     request(`/profile/${userId}`, { method: 'PUT', body: JSON.stringify(payload) }),
   getMatches: (userId, options = {}) => request(`/matchmaking/${userId}${buildQueryString(options)}`),
+  searchPlayers: (options = {}) => request(`/discovery${buildQueryString(options)}`),
 };

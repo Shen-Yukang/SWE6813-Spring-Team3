@@ -22,12 +22,19 @@ async function getMatches({
   }
 
   const profiles = await profileRepository.listAll();
+  const users = await userRepository.listAll();
+  const usernameById = {};
+
+  users.forEach((user) => {
+    usernameById[String(user._id)] = user.username;
+  });
 
   return profiles
     .filter((profile) => profile.userId !== userId)
     .filter((profile) => passesFilters(targetProfile, profile, filters))
     .map((profile) => ({
       userId: profile.userId,
+      username: usernameById[String(profile.userId)] || profile.userId,
       ...scoreProfiles(targetProfile, profile, weights),
     }))
     .sort((a, b) => b.totalScore - a.totalScore)

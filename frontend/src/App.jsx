@@ -3,6 +3,7 @@ import { Box, Button, Container, CssBaseline, Stack, ThemeProvider, Typography, 
 import LoginRegister from './pages/LoginRegister';
 import MatchingPage from './pages/MatchingPage';
 import Profile from './pages/Profile';
+import PlayerSearchPage from './pages/PlayerSearchPage';
 import { apiClient } from './api/client';
 
 const theme = createTheme({
@@ -68,6 +69,13 @@ function App() {
               >
                 Matching
               </Button>
+              <Button
+                variant={activePage === 'search' ? 'contained' : 'text'}
+                onClick={() => setActivePage('search')}
+                disabled={!session.user}
+              >
+                Search Players
+              </Button>
               {session.user ? (
                 <Button color="secondary" onClick={logout}>
                   Logout
@@ -80,6 +88,7 @@ function App() {
           {activePage === 'auth' ? <LoginRegister onLoginSuccess={onLoginSuccess} /> : null}
           {activePage === 'profile' ? <Profile currentUser={session.user} /> : null}
           {activePage === 'matching' ? <MatchingPage currentUser={session.user} /> : null}
+          {activePage === 'search' ? <PlayerSearchPage /> : null}
         </Container>
       </Box>
     </ThemeProvider>

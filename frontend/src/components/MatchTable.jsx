@@ -22,7 +22,7 @@ export default function MatchTable({ matches }) {
           }}
         >
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {match.userId}
+            {match.username || match.userId}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
             total score: {formatScore(match.totalScore)}

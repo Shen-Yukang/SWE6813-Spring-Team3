@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Alert,
   Button,
@@ -13,13 +13,9 @@ import {
 import MatchTable from '../components/MatchTable';
 import Visulization from '../components/Visulization';
 import { apiClient } from '../api/client';
-
-const REGION_OPTIONS = ['', 'NA', 'EU', 'APAC'];
-const GAME_MODE_OPTIONS = ['', 'ranked', 'casual', 'tournament'];
-const PLAY_STYLE_OPTIONS = ['', 'support', 'aggressive', 'defensive', 'balanced'];
+import { GAME_MODE_OPTIONS, PLAY_STYLE_OPTIONS, REGION_OPTIONS } from '../constants/preferences';
 
 export default function MatchingPage({ currentUser }) {
-  const [userId, setUserId] = useState('');
   const [matches, setMatches] = useState([]);
   const [status, setStatus] = useState('');
   const [error, setError] = useState('');
@@ -34,12 +30,6 @@ export default function MatchingPage({ currentUser }) {
     gameMode: '',
     playStyle: '',
   });
-
-  useEffect(() => {
-    if (currentUser?.id) {
-      setUserId(currentUser.id);
-    }
-  }, [currentUser]);
 
   const updateField = (name, value) => {
     setForm((current) => ({ ...current, [name]: value }));
@@ -60,7 +50,7 @@ export default function MatchingPage({ currentUser }) {
     try {
       setError('');
       setStatus('');
-      const result = await apiClient.getMatches(userId, getMatchOptions());
+      const result = await apiClient.getMatches(currentUser.id, getMatchOptions());
       const nextMatches = result.matches || [];
       setMatches(nextMatches);
       setStatus(`received ${nextMatches.length} matches`);
@@ -78,7 +68,7 @@ export default function MatchingPage({ currentUser }) {
             <Typography variant="h6">Matchmaking</Typography>
             {status ? <Alert severity="success">{status}</Alert> : null}
             {error ? <Alert severity="error">{error}</Alert> : null}
-            <TextField label="User ID" value={userId} onChange={(event) => setUserId(event.target.value)} />
+            <TextField label="Username" value={currentUser?.username || ''} InputProps={{ readOnly: true }} />
             <Divider />
             <Typography variant="subtitle2" color="text.secondary">
               Ranking controls
