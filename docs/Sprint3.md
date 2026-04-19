@@ -1,35 +1,29 @@
-# Sprint3.md
+# Sprint 3
 
 ## Sprint Goal
-Deliver the complete product and polish user experience.
+Refine and finalize all product features, expand test coverage to meet final requirements, and deliver a complete working platform.
 
 ## Stories
 
-1. Group System
-Allow players to form groups or teams.
+1. Refine — Matchmaking Logic & API (5 SP)
+   Edge-case handling and scoring fairness improvements.
 
-2. UX Improvements
-Improve navigation and usability.
+2. Refine — Friend System (Add/Remove/List friends) (4 SP)
+   Polish and stabilize friend features from Sprint 2.
 
-3. Visualization Dashboard
-Add an additional data visualization component.
+3. Refine — Cross-game Player Discovery (Search/Lookup) (4 SP)
+   Extended filters, improved UI, and new test coverage.
 
-4. Matchmaking Refinement
-Handle edge cases and improve scoring fairness.
+4. Refine — Visualization (final version) (4 SP)
+   Finalize dashboard charts connected to live API data.
 
-5. CI/CD Stabilization
-Ensure automated pipeline stability.
-
-6. Test Expansion
-Increase tests to final requirement.
-
-7. Final Demo Preparation
-Prepare final demonstration and presentation.
+5. Testing Increment Final (4 SP)
+   Reach ≥31 unit tests and ≥3 BDD scenarios, all passing.
 
 ## Deliverables
 
-Complete working platform
-30+ unit tests
-3 BDD scenarios
-Stable deployment
-Final demo video
+- Refined and fully functional platform (all Sprint 1–3 features live)
+- 53 tests passing (31 unit + integration + BDD)
+- 3 BDD scenarios passing
+- Stable CI/CD pipeline
+- Sprint 3 submission artifacts

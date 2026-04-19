@@ -1,0 +1,169 @@
+
+> behavior-aware-matching-service@0.2.0 test:all
+> jest --runInBand
+
+PASS tests/integration/api.test.js
+  ● Console
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.322Z","level":"info","message":"request completed","requestId":"req_x3ixda75","route":"GET /api/health","userId":null,"metadata":{"statusCode":200,"durationMs":3}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.464Z","level":"info","message":"request completed","requestId":"req_s7xi66ay","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":125}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.469Z","level":"info","message":"request completed","requestId":"req_btdqopd1","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":2}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.476Z","level":"info","message":"request completed","requestId":"req_1ep380t1","route":"PUT /api/profile/69e5089a7bf6b0a69beb42e6","userId":null,"metadata":{"statusCode":200,"durationMs":5}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.479Z","level":"info","message":"request completed","requestId":"req_dyho5ibf","route":"PUT /api/profile/69e5089a7bf6b0a69beb42ed","userId":null,"metadata":{"statusCode":200,"durationMs":2}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.485Z","level":"info","message":"request completed","requestId":"req_jhwcrhbm","route":"GET /api/matchmaking/69e5089a7bf6b0a69beb42e6","userId":null,"metadata":{"statusCode":200,"durationMs":5}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.490Z","level":"info","message":"request completed","requestId":"req_38rc2i6m","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":3}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.494Z","level":"info","message":"request completed","requestId":"req_a6ibpbzr","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":2}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.497Z","level":"info","message":"request completed","requestId":"req_vj83xut5","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.501Z","level":"info","message":"request completed","requestId":"req_d2ok00nn","route":"PUT /api/profile/69e5089a7bf6b0a69beb42fc","userId":null,"metadata":{"statusCode":200,"durationMs":2}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.503Z","level":"info","message":"request completed","requestId":"req_7ngyrt77","route":"PUT /api/profile/69e5089a7bf6b0a69beb42ff","userId":null,"metadata":{"statusCode":200,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.505Z","level":"info","message":"request completed","requestId":"req_swfukksv","route":"PUT /api/profile/69e5089a7bf6b0a69beb4302","userId":null,"metadata":{"statusCode":200,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.510Z","level":"info","message":"request completed","requestId":"req_aob8ap79","route":"GET /api/matchmaking/69e5089a7bf6b0a69beb42fc?wPreference=1&wSkill=0&wBehavior=0&region=NA&gameMode=ranked","userId":null,"metadata":{"statusCode":200,"durationMs":3}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.513Z","level":"info","message":"request completed","requestId":"req_v3v4lxpo","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.515Z","level":"info","message":"request completed","requestId":"req_t78eacgg","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.517Z","level":"info","message":"request completed","requestId":"req_60cs3gmd","route":"GET /api/discovery?q=alp","userId":null,"metadata":{"statusCode":200,"durationMs":2}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.520Z","level":"info","message":"request completed","requestId":"req_47564ibu","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.522Z","level":"info","message":"request completed","requestId":"req_vvjy6gnc","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.524Z","level":"info","message":"request completed","requestId":"req_aepggmj6","route":"PUT /api/profile/69e5089a7bf6b0a69beb431f","userId":null,"metadata":{"statusCode":200,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.526Z","level":"info","message":"request completed","requestId":"req_w37ngt0k","route":"PUT /api/profile/69e5089a7bf6b0a69beb4322","userId":null,"metadata":{"statusCode":200,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.527Z","level":"info","message":"request completed","requestId":"req_b893vufo","route":"GET /api/discovery?skillMin=80&skillMax=100","userId":null,"metadata":{"statusCode":200,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.530Z","level":"info","message":"request completed","requestId":"req_dkcospva","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.533Z","level":"info","message":"request completed","requestId":"req_yhhxi4vg","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":2}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.535Z","level":"info","message":"request completed","requestId":"req_b5hgmrmk","route":"PUT /api/profile/69e5089a7bf6b0a69beb432f","userId":null,"metadata":{"statusCode":200,"durationMs":2}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.536Z","level":"info","message":"request completed","requestId":"req_nae5j0bk","route":"PUT /api/profile/69e5089a7bf6b0a69beb4332","userId":null,"metadata":{"statusCode":200,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.538Z","level":"info","message":"request completed","requestId":"req_15vds5mq","route":"GET /api/discovery?region=NA","userId":null,"metadata":{"statusCode":200,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.541Z","level":"info","message":"request completed","requestId":"req_0xqgug0d","route":"POST /api/auth/register","userId":null,"metadata":{"statusCode":201,"durationMs":2}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.543Z","level":"info","message":"request completed","requestId":"req_eng5v86g","route":"PUT /api/profile/69e5089a7bf6b0a69beb433f","userId":null,"metadata":{"statusCode":200,"durationMs":2}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.544Z","level":"error","message":"request failed","requestId":"req_82hc2nmm","route":"GET /api/matchmaking/69e5089a7bf6b0a69beb433f?wSkill=abc","userId":null,"metadata":{"error":"wSkill must be a non-negative number"}}
+
+      at log (src/logging/logger.js:9:11)
+
+    console.log
+      {"timestamp":"2026-04-19T16:53:46.545Z","level":"info","message":"request completed","requestId":"req_82hc2nmm","route":"GET /api/matchmaking/69e5089a7bf6b0a69beb433f?wSkill=abc","userId":null,"metadata":{"statusCode":400,"durationMs":1}}
+
+      at log (src/logging/logger.js:9:11)
+
+PASS tests/integration/services.test.js
+PASS tests/bdd/discovery.test.js
+PASS tests/bdd/matchmaking.test.js
+PASS tests/unit/discoveryController.test.js
+PASS tests/unit/matchmakingController.test.js
+PASS tests/unit/matchScoring.test.js
+
+Test Suites: 7 passed, 7 total
+Tests:       53 passed, 53 total
+Snapshots:   0 total
+Time:        3.464 s, estimated 4 s
+Ran all test suites.
